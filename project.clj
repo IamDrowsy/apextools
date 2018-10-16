@@ -7,6 +7,7 @@
   :resource-paths ["src/resources"]
   :prep-tasks [["antlr"]
                "javac" "compile"]
+  :javac-options {:encoding "windows-1252"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.antlr/antlr4 "4.5"]
                  [org.clojure/tools.cli "0.3.5"]

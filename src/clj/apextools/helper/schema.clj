@@ -24,7 +24,9 @@
   (let [m {"name" (.getFullName fld)
            "relationshipName" (when (.getReferenceTo fld) (.replace (.getFullName fld) "__c" "__r"))
            "referenceTo" (.getReferenceTo fld)}
-        type (-> fld .getType .value)]
+        type (if-let [t (-> fld .getType)]
+               (-> t .value)
+               "unknown")]
     (if (not= "Summary" type)
       (assoc m "type" type)
       (assoc m "summaryOperation" (-> fld .getSummaryOperation .value)

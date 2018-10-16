@@ -36,6 +36,7 @@
 
 (defn- cache-file [f]
   (->> (str (string/replace (.toString f) #"/" "!") ".bin")
+       (#(string/replace % #":" ""))
        (str cache-path)
        (io/as-file)))
 
@@ -43,6 +44,7 @@
   [f data]
   (setup-folders)
   (let [c (cache-file f)]
+    (clojure.java.io/make-parents c)
     (nippy/freeze-to-file c data))
   data)
 
